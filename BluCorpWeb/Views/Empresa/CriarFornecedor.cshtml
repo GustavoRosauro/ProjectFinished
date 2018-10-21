@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "CriarFornecedor";
+}
+
+<h2>Cadastrar Fornecedor</h2>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery.maskedinput-1.4.1.min.js"></script>
+<h2>Criar Empresa</h2>
+<input id="idEmpresa" value="@ViewBag.Idempresa" hidden />
+<input id="estado" value="@ViewBag.Estado" hidden />
+<div class="col-md-12">
+    <label>Nome</label>
+    <input type="text" class="form-control" id="nome" /><br />
+    <label>CPF/CNPJ</label>
+    <input type="text" id="cnpj" class="form-control" /><br />
+    <label>Telefone</label>
+    <input type="text" class="form-control" id="telefone" /><br />
+    <label>RG</label>
+    <input type="text" class="form-control" id="rg" /><br />
+    <label>Nascimento/Fundação</label>
+    <input type="date" class="form-control" id="nascimento" /><br />
+    <button class="btn btn-default" id="salvar">Salvar</button>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/inputmask")
+    <script src="~/Scripts/jquery.maskedinput-1.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var maskJ = false;
+            $(function () {
+                $("#cnpj").mask("999.999.999-99");
+            });
+            $("#cnpj").keypress(function () {
+                var tamanho = $("#cnpj").val().replace(/\D/g, '').length;
+                if (tamanho === 11 && maskJ === false) {
+                    $("#cnpj").mask("99.999.999/9999-99");
+                    maskJ = true;
+                }
+            });
+        });
+    </script>
+    <script src="~/Scripts/Fornecedor.js"></script>
+    }
